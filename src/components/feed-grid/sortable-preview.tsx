@@ -18,30 +18,36 @@ interface SortablePreviewProps {
 export const SortablePreview = component$<SortablePreviewProps>(
   ({ images, device, onReorder$ }) => {
     const gridRef = useSignal<HTMLElement | undefined>(undefined);
+    const imageCount = images.length;
 
-    const totalCells = Math.max(9, Math.ceil(images.length / 3) * 3);
-    const emptyCellsCount = totalCells - images.length;
+    const totalCells = Math.max(9, Math.ceil(imageCount / 3) * 3);
+    const emptyCellsCount = totalCells - imageCount;
 
     const grid = (
-      <div
-        ref={gridRef}
-        class="grid grid-cols-3 gap-px bg-white"
-      >
-        {images.map((image) => (
-          <div
-            key={image.id}
-            class="aspect-[3/4] overflow-hidden bg-neutral-100"
-            data-id={image.id}
-            data-sortable-item="true"
-          >
-            <img
-              src={image.previewUrl}
-              alt={image.name}
-              class="h-full w-full object-cover object-center"
-              draggable={false}
-            />
-          </div>
-        ))}
+      <div ref={gridRef} class="grid grid-cols-3 gap-px bg-white">
+        {images.map((image) => {
+          const id = image.id;
+          const previewUrl = image.previewUrl;
+          const name = image.name;
+
+          return (
+            <div
+              key={id}
+              class="aspect-[3/4] overflow-hidden bg-neutral-100"
+              data-id={id}
+              data-sortable-item="true"
+            >
+              <img
+                src={previewUrl}
+                alt={name}
+                width={300}
+                height={400}
+                class="h-full w-full object-cover object-center"
+                draggable={false}
+              />
+            </div>
+          );
+        })}
 
         {Array.from({ length: emptyCellsCount }).map((_, i) => (
           <div
@@ -55,7 +61,7 @@ export const SortablePreview = component$<SortablePreviewProps>(
 
     // eslint-disable-next-line qwik/no-use-visible-task
     useVisibleTask$(({ cleanup, track }) => {
-      track(() => images.length);
+      track(() => imageCount);
       track(() => device);
 
       if (!gridRef.value) return;

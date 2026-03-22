@@ -47,6 +47,8 @@ export const AuthPanel = component$(() => {
                   src={logoDark}
                   alt="Gridlio"
                   class="w-[200px] max-w-none opacity-90"
+                  width={200}
+                  height={48}
                 />
               </div>
 

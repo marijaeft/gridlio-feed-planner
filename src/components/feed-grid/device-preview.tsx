@@ -21,6 +21,8 @@ export const DevicePreview = component$<DevicePreviewProps>(
             alt={image.name}
             class="h-full w-full object-cover"
             draggable={false}
+            width={300}
+            height={400}
           />
         </div>
       )),

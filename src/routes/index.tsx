@@ -258,6 +258,8 @@ export default component$(() => {
               src={logoDark}
               alt="Gridlio"
               class="w-[150px] max-w-none opacity-95"
+              width={150}
+              height={36}
             />
             <div class="hidden sm:block">
               <p class="text-xs uppercase tracking-[0.16em] text-white/70">

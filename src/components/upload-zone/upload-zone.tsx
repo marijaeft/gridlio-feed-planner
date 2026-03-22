@@ -17,7 +17,6 @@ export const UploadZone = component$<UploadZoneProps>(({ onImagesAdded$ }) => {
   });
 
   const handleDrop$ = $((event: DragEvent) => {
-    event.preventDefault();
 
     if (!event.dataTransfer?.files || event.dataTransfer.files.length === 0) {
       return;
@@ -27,13 +26,13 @@ export const UploadZone = component$<UploadZoneProps>(({ onImagesAdded$ }) => {
     onImagesAdded$(images);
   });
 
-  const handleDragOver$ = $((event: DragEvent) => {
-    event.preventDefault();
-  });
+  const handleDragOver$ = $(() => {});
 
   return (
     <label
       class="flex min-h-[240px] cursor-pointer flex-col items-center justify-center rounded-2xl border-2 border-dashed border-neutral-300 bg-neutral-50 px-6 py-10 text-center transition hover:border-neutral-500"
+      preventdefault:drop
+      preventdefault:dragover
       onDrop$={handleDrop$}
       onDragOver$={handleDragOver$}
     >
