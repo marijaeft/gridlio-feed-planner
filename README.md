@@ -1,65 +1,93 @@
-# Qwik City App ⚡️
+# Gridlio Feed Planner
 
-- [Qwik Docs](https://qwik.dev/)
-- [Discord](https://qwik.dev/chat)
-- [Qwik GitHub](https://github.com/QwikDev/qwik)
-- [@QwikDev](https://twitter.com/QwikDev)
-- [Vite](https://vitejs.dev/)
+Gridlio is a visual Instagram feed planner that helps you organize and preview your content before posting.
 
----
+It allows you to upload, paste, and rearrange images in a simple interface and see how your feed will look across different devices.
+
+## Why I built this
+
+I wanted a simple way to plan an Instagram feed in advance without dealing with daily posting or limitations from existing tools.
+
+Most free tools restrict the number of images you can import, which makes full planning difficult. Gridlio focuses on speed, simplicity, and flexibility.
+
+## Features
+
+- Upload images via file picker or drag and drop  
+- Paste images directly from clipboard  
+- Drag and drop to reorder posts  
+- Live preview of feed layout  
+- Mobile, tablet, and desktop mockups  
+- Always-visible 3x3 grid structure  
+- Persistent per-user workspace  
+- Secure authentication  
+
+## Tech Stack
+
+### Frontend
+- Qwik  
+- Tailwind CSS  
+- SortableJS  
+
+### Backend (Supabase)
+- Authentication (login, register, logout)  
+- Postgres database (`feed_items`)  
+- Storage bucket for images  
+
+## How it works
+
+- Images are uploaded to Supabase Storage  
+- Metadata (user, image path, order) is stored in Postgres  
+- Signed URLs are generated to securely display images  
+- Users can reorder images and the order is persisted  
+- Each user sees only their own data using Row Level Security  
 
 ## Project Structure
 
-This project is using Qwik with [QwikCity](https://qwik.dev/qwikcity/overview/). QwikCity is just an extra set of tools on top of Qwik to make it easier to build a full site, including directory-based routing, layouts, and more.
-
-Inside your project, you'll see the following directory structure:
-
-```
-├── public/
-│   └── ...
-└── src/
-    ├── components/
-    │   └── ...
-    └── routes/
-        └── ...
-```
-
-- `src/routes`: Provides the directory-based routing, which can include a hierarchy of `layout.tsx` layout files, and an `index.tsx` file as the page. Additionally, `index.ts` files are endpoints. Please see the [routing docs](https://qwik.dev/qwikcity/routing/overview/) for more info.
-
-- `src/components`: Recommended directory for components.
-
-- `public`: Any static assets, like images, can be placed in the public directory. Please see the [Vite public directory](https://vitejs.dev/guide/assets.html#the-public-directory) for more info.
-
-## Add Integrations and deployment
-
-Use the `npm run qwik add` command to add additional integrations. Some examples of integrations includes: Cloudflare, Netlify or Express Server, and the [Static Site Generator (SSG)](https://qwik.dev/qwikcity/guides/static-site-generation/).
-
-```shell
-npm run qwik add # or `yarn qwik add`
+```src/
+  components/
+    auth/
+    feed-grid/
+    upload-zone/
+  lib/
+    auth.ts
+    feed-items.ts
+    storage.ts
+    image-utils.ts
+    feed-mappers.ts
+    supabase.ts
+  routes/
+    index.tsx 
 ```
 
-## Development
+## Getting Started
 
-Development mode uses [Vite's development server](https://vitejs.dev/). The `dev` command will server-side render (SSR) the output during development.
+### Install dependencies
 
-```shell
-npm start # or `yarn start`
+```bash
+npm install
+```
+### Run the app
+```bash
+npm start
 ```
 
-> Note: during dev mode, Vite may request a significant number of `.js` files. This does not represent a Qwik production build.
+## Environment Variables
 
-## Preview
+### Create a .env file:
 
-The preview command will create a production build of the client modules, a production build of `src/entry.preview.tsx`, and run a local server. The preview server is only for convenience to preview a production build locally and should not be used as a production server.
-
-```shell
-npm run preview # or `yarn preview`
+```bash
+PUBLIC_SUPABASE_URL=your_supabase_url
+PUBLIC_SUPABASE_ANON_KEY=your_supabase_publishable_key
 ```
 
-## Production
+## Future Improvements
 
-The production build will generate client and server modules by running both client and server build commands. The build command will use Typescript to run a type check on the source code.
+- Instagram integration
+- Content scheduling
+- Captions/descriptions per image
+- Import existing posts from Instagram
+- Image cropping and positioning
 
-```shell
-npm run build # or `yarn build`
-```
+## Usage
+
+This app is free to use for anyone who wants a simple space to organize their Instagram feed visually.
