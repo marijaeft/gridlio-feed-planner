@@ -1,4 +1,4 @@
-# Gridlio Feed Planner
+# Gridlio Feed Planner 0.2
 
 Gridlio is a visual Instagram feed planner that helps you organize and preview your content before posting.
 
